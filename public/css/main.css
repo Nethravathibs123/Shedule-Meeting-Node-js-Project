@@ -1,0 +1,174 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+nav {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px;
+    margin-right: 10px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 5px 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+#confirmationMessage {
+    color: green;
+}
+
+    /* Styles for the form container */
+    .form-container {
+        border: 2px solid #007BFF; /* Change the border color as needed */
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+        background-color: #f9f9f9; /* Light background color */
+    }
+
+    .time-slot {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #e7f3fe; /* Light blue background */
+        width:15%;
+    }
+
+    .slot-header h3 {
+        text-align: center;
+        margin: 0;
+    }
+
+    .slot-header p {
+        text-align: center;
+        margin: 5px 0 0;
+    }
+
+    .book-slot {
+        background-color: #007BFF; /* Blue background */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    .book-slot:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+    
+    .closed-box {
+        width: 30%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 20px 0;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .closed-box h2 {
+        margin-top: 0;
+    }
+    .closed-box label {
+       
+        display: block;
+        margin-top: 10px;
+    }
+    .closed-box input {
+        width: 90%;
+        padding: 8px;
+        margin-top: 5px;
+    }
+    .closed-box button {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .closed-box button:hover {
+        background-color: #0056b3;
+    }
+    .time-slot {
+        text-align: center;
+        border: 1px solid #0f0cb4;
+        border-radius: 15px;
+        border-width: 2px;
+        padding: 8px;
+        margin: 10px 0;
+        background-color: #f0f0f0;
+        cursor: pointer; /* Changes the cursor to indicate clickable element */
+    }
+    .time-slot:hover {
+        border-color: #118760; /* Changes background color on hover */
+        text-align: center;
+        
+    }
+
+    #scheduledMeetingsContainer {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap onto the next line if there's not enough space */
+    justify-content: space-between; /* Distributes space evenly */
+}
+
+.meeting-item {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    flex: 1 1 calc(33% - 20px); /* Each item takes up approximately one-third of the container */
+    box-sizing: border-box; /* Ensures padding and margin are included in the total width */
+}
+
+.meeting-item a {
+    text-decoration: none;
+    color: #e6e0e0; /* Change color as desired */
+}
+
+.cancel-button {
+    color: white; /* Text color */
+    background-color: blue; /* Background color */
+    padding: 5px 10px; /* Padding */
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.cancel-button:hover {
+    background-color: darkblue; /* Change color on hover */
+}

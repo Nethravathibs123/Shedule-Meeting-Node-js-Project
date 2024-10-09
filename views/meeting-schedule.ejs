@@ -1,0 +1,117 @@
+<%- include('includes/head') %>
+<link rel="stylesheet" href="/css/main.css">
+
+<h2>Schedule a Meeting</h2>
+
+<!-- Time Slots -->
+<div id="timeSlots">
+    <div class="time-slot"  data-time="09:00" style="cursor: pointer;">
+        <div class="slot-header">
+            <h3>9:00 AM</h3>
+            <p><span class="available-count">5 Available</span></p>
+        </div>
+    </div>
+    <div class="time-slot" data-time="10:00" style="cursor: pointer;">
+        <div class="slot-header">
+            <h3>10:00 AM</h3>
+            <p><span class="available-count">3 Available</span></p>
+        </div>
+    </div>
+    <div class="time-slot" data-time="11:00" style="cursor: pointer;">
+        <div class="slot-header">
+            <h3>11:00 AM</h3>
+            <p><span class="available-count">2 Available</span></p>
+        </div>
+    </div>
+</div>
+
+<!-- Closed Box for Scheduling Meeting -->
+<div class="closed-box" id="scheduleBox" style="display: none;">
+    <form id="scheduleForm" action="/schedule" method="POST">
+        <input type="hidden" id="selectedTime" name="time">
+
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <button type="submit">Book</button>
+    </form>
+</div>
+
+<!-- Confirmation Message -->
+<div id="confirmationMessage" style="display: none;">
+    <h3>Slot confirmed, <span id="confirmedName"></span>. Please join at the scheduled time (<span id="confirmedTime"></span>) via the following link: 
+        <a href="http://example.com/meeting-link" target="_blank">Meeting Link</a>
+    </h3>
+</div>
+
+<h2>Scheduled Meetings</h2>
+
+<!-- Container to Display Booked Slots -->
+<div id="scheduledMeetingsContainer">
+    <% meetings.forEach(meeting => { %>
+        <div class="meeting-item" style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+            <p>Hi <%= meeting.name %>,</p>
+            <p>Please join the meeting via this <a href="<%= meeting.meetingLink %>" target="_blank"><%= meeting.meetingLink %></a> at  <%= meeting.time %></p>
+            <a href="/delete/<%= meeting.id %>" class="cancel-button" data-id="<%= meeting.id %>">Cancel</a>
+        </div>
+    <% }) %>
+</div>
+<%- include('includes/end') %>
+
+<!-- Script to Handle Form Submission -->
+<script>
+    // Add click event listener to each time slot
+    document.querySelectorAll('.time-slot').forEach(slot => {
+        slot.addEventListener('click', function() {
+            const selectedTime = this.getAttribute('data-time');
+            document.getElementById('selectedTime').value = selectedTime; // Set the selected time value
+
+            // Show the schedule form
+            document.getElementById('scheduleBox').style.display = 'block';
+        });
+    });
+
+    document.getElementById('scheduleForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const time = document.getElementById('selectedTime').value;
+
+        // Show confirmation message
+        document.getElementById('confirmationMessage').style.display = 'block';
+        document.getElementById('confirmedName').innerText = name;
+        document.getElementById('confirmedTime').innerText = time; // Use selected time here
+
+        // Submit the form
+        e.target.submit();
+         // Handle cancellation of meetings
+    document.querySelectorAll('.cancel-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const meetingId = this.getAttribute('data-id');
+            const time = this.getAttribute('data-time');
+
+            // Increase available count in the corresponding time slot
+            const slot = document.querySelector(`.time-slot[data-time="${time}"]`);
+            const availableCount = parseInt(slot.getAttribute('data-available'));
+            slot.setAttribute('data-available', availableCount + 1);
+            slot.querySelector('.available-count').innerText = (availableCount + 1) + " Available";
+
+            // Send request to delete meeting (you can implement this based on your backend)
+            fetch(`/delete/${meetingId}`, { method: 'GET' })
+                .then(response => {
+                    if (response.ok) {
+                        // Optionally remove the row from the table or refresh the meetings
+                        this.closest('tr').remove();
+                    } else {
+                        console.error("Failed to cancel meeting");
+                    }
+                })
+                .catch(err => console.error(err));
+        });
+    });
+    });
+</script>
