@@ -6,6 +6,7 @@ const meetingRoutes = require('./routes/meetingRoutes'); // Adjust the path if n
 const errorController = require('./controllers/error'); // Make sure this controller is set up
 
 const app = express();
+const cors = require('cors');
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -13,8 +14,10 @@ app.set('views', 'views');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Use your routes
-app.use(meetingRoutes);
+// Use the meeting routes
+
+app.use(meetingRoutes); // Adjust the base path as necessary
+app.use(cors());
 
 // Handle 404 errors
 app.use(errorController.get404); // Make sure this function is defined to handle 404s

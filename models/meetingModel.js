@@ -25,6 +25,10 @@ Meeting.init({
         type: DataTypes.STRING, // Change to DATE if you want to handle date and time properly
         allowNull: false,
     },
+    meetingLink: {
+        type: DataTypes.STRING, // Ensure this field is present
+        allowNull: false,
+    }
 }, {
     sequelize, // Pass the `sequelize` instance
     modelName: 'Meeting', // Model name
